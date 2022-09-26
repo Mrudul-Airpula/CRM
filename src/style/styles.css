@@ -1,0 +1,115 @@
+body {
+    margin: 0;
+}
+
+.Login_outer {
+    background-color: aliceblue;
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.Login_outer_row1 {
+    margin-top: 10px;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.Login_outer_row2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+
+}
+
+.Login_outer_row2 span {
+    color: blueviolet;
+}
+
+.Login_outer_row1_inner {
+    background-color: white;
+    width: 90%;
+    max-width: 400px;
+}
+
+.Login_outer_row1_inner_row1 {
+    padding-top: 20px;
+    padding-left: 40%;
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+}
+
+.Login_outer_row1_inner_row1 label {
+    padding-bottom: 1px;
+    padding-top: 10px;
+}
+
+.Login_outer_row1_inner_row2 {
+    /* background-color: blue; */
+    padding-left: 30px;
+    padding-top: 10px;
+}
+
+.Login_outer_row1_inner_row3 {
+    /* background-color: blue; */
+    padding-left: 30px;
+    padding-top: 5px;
+}
+
+.Login_outer_row1_inner_row4,
+.Login_outer_row1_inner_row5 {
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 30px;
+}
+
+.Login_outer_row1_inner_row4 input,
+.Login_outer_row1_inner_row5 input {
+    padding-left: 50px;
+    width: 90%;
+    padding: 10px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    outline: none;
+
+
+}
+
+.Login_outer_row1_inner_row6 {
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+}
+
+.Login_outer_row1_inner_row6_text {
+    padding-left: 100px;
+    padding-right: 10px;
+    color: blueviolet;
+}
+
+.Login_outer_row1_inner_row7 {
+
+    margin-top: 30px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: blueviolet;
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 2px;
+    padding: 10px;
+
+}
