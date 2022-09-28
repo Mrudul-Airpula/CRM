@@ -1,5 +1,5 @@
-import "./styles.css";
-import logo from "./logo.png"
+import "./Login.css";
+import logo from "./images/logo.png"
 import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
 import Admin from "./Admin";
@@ -28,7 +28,7 @@ export default function Login() {
                         <label>Please sign-in to your account</label>
                     </div>
                     <div className="Login_outer_row1_inner_row4">
-                    <input type="text" placeholder="Email" onChange={(e) => { setEmail(e.target.value) }} />
+                        <input type="text" placeholder="Email" onChange={(e) => { setEmail(e.target.value) }} />
                         <label> {email} </label>
                     </div>
                     <div className="Login_outer_row1_inner_row5">

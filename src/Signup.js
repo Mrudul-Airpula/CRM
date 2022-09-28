@@ -1,5 +1,5 @@
 import "./Signup.css"
-import logo from "./logo.png"
+import logo from "./images/logo.png"
 import { MdSentimentSatisfiedAlt, MdWavingHand } from "react-icons/md";
 import React from "react";
 import { useState } from "react";
