@@ -1,11 +1,18 @@
-import "./style/styles.css";
+import "./styles.css";
 import logo from "./logo.png"
 import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import Admin from "./Admin";
 export default function Login() {
     const navigate = useNavigate();
-    function signup() {
-        navigate("/Signup");
+    function login() {
+        navigate("/Admin")
     }
+    function signup() {
+        navigate("/signup");
+    }
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     return (<>
         <div className="Login_outer">
             <div className="Login_outer_row1">
@@ -21,10 +28,12 @@ export default function Login() {
                         <label>Please sign-in to your account</label>
                     </div>
                     <div className="Login_outer_row1_inner_row4">
-                        <input type="text" placeholder="Email" />
+                    <input type="text" placeholder="Email" onChange={(e) => { setEmail(e.target.value) }} />
+                        <label> {email} </label>
                     </div>
                     <div className="Login_outer_row1_inner_row5">
-                        <input type="Password" placeholder="Password" />
+                        <input type="Password" placeholder="Password" onChange={(e) => { setPassword(e.target.value) }} />
+                        <label>{password}</label>
                     </div>
                     <div className="Login_outer_row1_inner_row6">
                         <input type="checkbox" />
@@ -34,7 +43,7 @@ export default function Login() {
                         </div>
                     </div>
                     <div className="Login_outer_row1_inner_row7">
-                        <label>LOGIN</label>
+                        <label onClick={login}>LOGIN</label>
                     </div>
                 </div>
             </div>
@@ -44,5 +53,7 @@ export default function Login() {
             </div>
         </div>
     </>
+
+
     );
 }

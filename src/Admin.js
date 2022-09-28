@@ -4,7 +4,7 @@ import { MdOutlineArrowForwardIos } from "react-icons/md";
 import { FaUserCircle } from "react-icons/fa";
 import { BsMessenger } from "react-icons/bs";
 import { ImCross } from "react-icons/im"
-import "./style/adstyle.css";
+import "./Admin.css";
 export default function Admin() {
     return <>
         <div className="Topbar">

@@ -1,14 +1,13 @@
 import React from 'react';
+import { Doughnut } from 'react-chartjs-2';
 import ReactDOM from 'react-dom/client';
-import Leads from './component/Leads';
-//import Navigation from './Navigation';
-//import Filterbar from './component/Filterbar';
-//import Otp from './component/Otp'
-//import Bargraph from './component/Bargraph'
+import Navigation from './Navigation';
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Leads/>
+    <Navigation />
   </React.StrictMode>
 );
