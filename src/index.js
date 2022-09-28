@@ -1,7 +1,11 @@
 import React from 'react';
-import { Doughnut } from 'react-chartjs-2';
 import ReactDOM from 'react-dom/client';
 import Navigation from './Navigation';
+import SalesDash from './SalesDash';
+import VericalGraph from './VerticalGraph';
+import HorizontalGraph from './HorizontalGraph';
+import DoughnutGraph from './DoughnutGraph';
+import Otp from './Otp';
 
 
 

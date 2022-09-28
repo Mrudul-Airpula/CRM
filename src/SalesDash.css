@@ -1,0 +1,138 @@
+.SalesOuter {
+    background-color: rgb(255, 255, 255);
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.SalesInner1,
+.SalesInner2,
+.SalesInner3 {
+    background-color: rgb(236, 233, 233);
+    min-width: 250px;
+    height: 80%;
+    display: flex;
+    flex-direction: column;
+    margin: 50px;
+}
+
+.Inner1_row1,
+.Inner2_row1,
+.Inner3_row1 {
+    /* background-color: green; */
+    padding: 15px;
+}
+
+.dropdownicon {
+    font-size: large;
+}
+
+.Inner1_row1 label {
+    color: red;
+    margin-left: 5px;
+    margin-bottom: 10px;
+}
+
+.Inner_row2 {
+    background-color: rgb(255, 255, 255);
+    margin: 10px;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.Inner_row2_row1 {
+    padding: 20px;
+    display: flex;
+    flex-direction: row;
+}
+
+
+.Inner_row2 ul {
+    padding: 8px;
+    margin: 8px;
+    display: flex;
+    flex-direction: column;
+    list-style-type: none;
+
+}
+
+.Inner_row2 li {
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+}
+
+.threedotsicon {
+    margin-left: 30px;
+}
+
+.eventicon,
+.taskicon,
+.leadicon {
+    padding: 5px;
+    font-size: x-large;
+    color: rgb(255, 255, 255);
+}
+
+.eventicon_outer,
+.taskicon_outer,
+.leadicon_outer {
+    background-color: rgb(43, 173, 43);
+    display: flex;
+    align-items: center;
+    border-radius: 2px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+.taskicon_outer {
+    background-color: rgb(206, 22, 22);
+}
+
+.leadicon_outer {
+    background-color: blue;
+}
+
+.Inner_row2 label {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-left: 8px;
+}
+
+.Inner_row3 {
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    margin: 10px;
+    border-radius: 2px;
+    display: flex;
+    flex-direction: row;
+}
+
+.Inner_row3 label {
+    margin-left: 8px;
+}
+
+.Inner_row4 {
+    background-color: rgb(255, 255, 255);
+    padding: 20px;
+    margin: 10px;
+    border-radius: 2px;
+    display: flex;
+    justify-content: center;
+}
+
+.Inner2_row1 label {
+    color: orangered;
+    margin-left: 5px;
+    margin-bottom: 10px;
+}
+
+.Inner3_row1 label {
+    color: green;
+    margin-left: 5px;
+    margin-bottom: 10px;
+}
