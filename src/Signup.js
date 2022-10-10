@@ -1,18 +1,16 @@
 import "./Signup.css"
-import logo from "./images/logo.png"
-import { MdSentimentSatisfiedAlt, MdWavingHand } from "react-icons/md";
+import logo from "./images/signup_logo.png"
+import { MdWavingHand } from "react-icons/md";
 import React from "react";
 import { useState } from "react";
 
-export default function Signup() {
-
+export default function Signup({ setshow }) {
 
     const [firstname, setFirstname] = useState("");
     const [lastname, setLastname] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [repassword, setRepassword] = useState("");
-
 
     return (<>
         <div className="signup_outer">
@@ -54,7 +52,7 @@ export default function Signup() {
                     </div>
                 </div>
                 <div className="signup_inner_row9">
-                    <button> REGISTER</button>
+                    <button onClick={(e) => { setshow(true) }}> REGISTER</button>
                 </div>
             </div>
         </div>
