@@ -20,11 +20,12 @@ con.connect(function (err) {
 
 
 
+
 app.post("/loginapi", (req, res) => {
-  let username = req.body.username;
+  let email = req.body.email;
   let password = req.body.password;
-  let sql = "SELECT id, txtFirstName FROM tblusers where txtFirstName='" + username + "' and txtPassword='" + password + "'";
-  if (password == "" || username == "") {
+  let sql = "SELECT id, txtEmail FROM tblusers where txtEmail='" + email + "' and txtPassword='" + password + "'";
+  if (password == "" || email == "") {
     res.send("Please enter your details")
     return
   }
@@ -39,6 +40,7 @@ app.post("/loginapi", (req, res) => {
     }
   });
 });
+
 
 
 
@@ -87,6 +89,7 @@ app.post("/signup", (req, res) => {
 
 
 
+
 app.post("/verifyotp", (req, res) => {
   let otp = req.body.otp;
   let sql = "select id from crm.tblusers where txtOTP='" + otp + "';"
@@ -114,6 +117,42 @@ app.post("/resendotp", (req, res) => {
     }
   });
 });
+
+
+
+
+app.post('/getuserlistwithfilter', (req, res) => {
+  let filtertype = req.body.filtertype;
+  let filtervalue = req.body.filtervalue;
+  let sql = "select * from crm.tblusers where " + filtertype + " = '" + filtervalue + "'"
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log(result)
+    res.send(result)
+  })
+})
+
+
+
+
+app.post("/getsingleprofile", (req, res) => {
+  let id = req.body.id;
+  let sql = "select txtFirstName,txtLastName,txtEmail,txtdob,txtAddress from tblusers where id = '" + id + "';"
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("Profile information displayed")
+    if (result != "") {
+      res.send("Profile Information " + JSON.stringify(result))
+      return
+    }
+    else {
+      res.send("Profile does not exist")
+      return
+    }
+  });
+});
+
+
 
 
 app.post("/insertsingleprofile", (req, res) => {
@@ -178,23 +217,6 @@ app.post("/insertsingleprofile", (req, res) => {
 
 
 
-app.post("/getsingleprofile", (req, res) => {
-  let id = req.body.id;
-  let sql = "select txtFirstName,txtLastName,txtEmail,txtdob,txtAddress from tblusers where id = '" + id + "';"
-  con.query(sql, function (err, result) {
-    if (err) throw err;
-    console.log("Profile information displayed")
-    if (result != "") {
-      res.send("Profile Information " + JSON.stringify(result))
-      return
-    }
-    else {
-      res.send("Profile does not exist")
-      return
-    }
-  });
-});
-
 
 app.post("/updatesingleprofile", (req, res) => {
   let id = req.body.id;
@@ -220,6 +242,265 @@ app.post("/updatesingleprofile", (req, res) => {
 })
 
 
+
+
+app.post('/campaignwiseprospectcount', (req, res) => {
+  let sql = "SELECT B.refCampaignId, A.txtCampaignName, D.txtConversionType, count(txtCampaignName) as count FROM tblcampaign A  JOIN tblleadcampaignmap B ON A.id = B.refCampaignId  JOIN  tblactivity C ON B.id = C.refMapid    JOIN  tblconversiontype D ON C.refConversionStatus = D.id  where D.txtConversionType = 'Prospect'  group by A.txtCampaignName;"
+  con.query(sql, function (err, result) {
+    if (err) throw err
+    console.log(result)
+    res.send(result)
+  })
+})
+
+
+
+
+app.post('/leadsfunnel', (req, res) => {
+  let sql = "select count(id) leadscount from crm.tblleads union all SELECT count(d.txtConversionType) as NoOfLeads FROM crm.tblleads a JOIN crm.tblleadcampaignmap b ON a.id = b.refLeadId JOIN crm.tblactivity c ON b.id = c.refMapid JOIN crm.tblconversiontype d ON c.refConversionStatus = d.id where d.txtConversionType = 'Nurturing ' or d.txtConversionType = 'Prospect ' group by d.txtConversionType;"
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log(result)
+    res.send(result)
+  })
+})
+
+
+
+
+app.post('/ManagerwiseProspectCount', (req, res) => {
+  let sql = "SELECT B.txtFirstName, A.txtJobTitle, E.txtConversionType, COUNT(E.txtConversionType) FROM tbljobtitle A JOIN tblusers B ON A.id = B.refJobTitle JOIN tblleadcampaignmap C ON C.refCreatedBy = B.id JOIN tblactivity D ON D.refMapid = C.id JOIN tblconversiontype E ON D.refConversionStatus = E.id WHERE A.txtJobTitle = '% Manager' AND E.txtConversionType = 'Prospect';"
+  con.query(sql, function (err, result) {
+    if (err) throw err
+    console.log(result)
+    res.send(result)
+  })
+})
+
+
+
+
+app.post('/prospectGrowth', (req, res) => {
+  let sql = "SELECT d.txtConversionType, COUNT(d.txtConversionType) as count FROM crm.tblleads a JOIN crm.tblleadcampaignmap b ON a.id = b.refLeadId JOIN crm.tblactivity c ON b.id = c.refMapid JOIN crm.tblconversiontype d ON c.refConversionStatus = d.id WHERE d.txtConversionType = 'Prospect';"
+  con.query(sql, function (err, result) {
+    if (err) throw err
+    console.log(result)
+    res.send(result)
+  })
+})
+
+
+
+
+app.post('/SalespersonwiseSuccessRate', (req, res) => {
+  let sql = "SELECT tm.refLeadId,tl.txtFirstName,tc.txtConversionType,COUNT(txtFirstName) count FROM tblleads tl JOIN tblleadcampaignmap tm ON tl.id = tm.refLeadId JOIN tblactivity ta ON tm.id = ta.refMapid JOIN tblconversiontype tc ON tc.id = ta.refConversionStatus WHERE tc.txtConversionType = 'Prospect' GROUP BY (tl.txtFirstName);;"
+  con.query(sql, function (err, result) {
+    if (err) throw err
+    console.log(result)
+    res.send(result)
+  })
+})
+
+
+
+
+app.post('/getleadslistwithfilter', (req, res)=>{
+  let filtertype = req.body.filtertype;
+  let filtervalue = req.body.filtervalue;
+  let sql = "select * from crm.tblleads where "+filtertype+" = '"+filtervalue+"'"
+  con.query(sql, function(err, result){
+    if(err) throw err;
+    console.log(result)
+    res,send(result)
+  })
+})
+
+
+
+
+app.post("/GetSingleLead", (req, res) => {
+  let LeadName = req.body.LeadName;
+  let sqlSingleLead =
+    "SELECT tl.txtFirstName FirstName,tl.txtLastName LastName,tl.status1 Status,tl.dtCreatedOn CreatedOn,tl.txtEmail Email,tl.Responses,tu.txtFirstName Owner FROM tblleads tl JOIN tblusers tu on tl.refCreatedBy=tu.id where tl.txtFirstName = '" + LeadName + "';";
+  con.query(sqlSingleLead, function (err, result) {
+    if (err) throw err;
+    console.log("Selected Lead Details");
+    if (result != "") {
+      res.send(
+        "Lead details for selected Lead" + JSON.stringify(result)
+      );
+      return;
+    } else {
+      res.send("LeadName Does Not Exist");
+      return;
+    }
+  });
+});
+
+
+
+
+app.post("/InsertSingleLead", (req, res) => {
+  let firstname = req.body.firstname;
+  let lastname = req.body.lastname;
+  let Status = req.body.Status;
+  let CreatedOn = req.body.CreatedOn;
+  let Email = req.body.Email;
+  let Responses = req.body.Responses;
+  let Owner = req.body.Owner;
+  let sqlinsert =
+    "insert into tblleads (txtFirstName,txtLastName,status1,dtCreatedOn,txtEmail,Responses,refCreatedby) VALUES('" +
+    firstname +
+    "','" +
+    lastname +
+    "','" +
+    Status +
+    "','" +
+    CreatedOn +
+    "','" +
+    Email +
+    "','" +
+    Responses +
+    "','" +
+    Owner +
+    "');";
+  if (firstname == "") {
+    res.send("firstname is mandatory");
+    return res;
+  }
+  if (lastname == "") {
+    res.send("lastname is mandatory");
+    return res;
+  }
+  if (CreatedOn == "") {
+    res.send("Startdate is mandatory");
+    return res;
+  }
+  if (Email == "") {
+    res.send("Enddate is mandatory");
+    return res;
+  }
+  if (Owner == "") {
+    res.send("CampaignOwner name is mandatory");
+    return res;
+  }
+
+  con.query(sqlinsert, function (err, result) {
+    if (err) throw err;
+    console.log("1 record inserted");
+    res.send("1 record inserted");
+  });
+});
+
+
+
+
+app.post("/UpdateSingleLead", (req, res) => {
+  let firstname = req.body.firstname;
+  let lastname = req.body.lastname;
+  let Status = req.body.Status;
+  let CreatedOn = req.body.CreatedOn;
+  let Email = req.body.Email;
+  let Responses = req.body.Responses;
+  let Owner = req.body.Owner;
+  let id = req.body.id;
+  let sqlupdate =
+    "UPDATE tblleads SET  txtFirstName ='" +
+    firstname +
+    "',txtLastName = '" +
+    lastname +
+    "',Status1 = '" +
+    Status +
+    "',dtCreatedOn= '" +
+    CreatedOn +
+    "',txtEmail= '" +
+    Email +
+    "',Responses= '" +
+    Responses +
+    "',refCreatedby='" +
+    Owner +
+    "'WHERE id = '" +
+    id +
+    "';";
+  if (firstname == "") {
+    res.send("firstname is mandatory");
+    return res;
+  }
+  if (lastname == "") {
+    res.send("lastname is mandatory");
+    return res;
+  }
+  if (CreatedOn == "") {
+    res.send("Startdate is mandatory");
+    return res;
+  }
+  if (Email == "") {
+    res.send("Enddate is mandatory");
+    return res;
+  }
+  if (Owner == "") {
+    res.send("CampaignOwner name is mandatory");
+    return res;
+  }
+
+  con.query(sqlupdate, function (err, result) {
+    if (err) throw err;
+    console.log("1 record updated");
+    res.send("1 record updated");
+  });
+});
+
+
+
+
+app.post("/GetCampaignListWithFilter", (req, res) => {
+  let campaignname = req.body.campaignname;
+  let name = req.body.name;
+
+  let sql = "select * from tblcampaign where txtCampaignName= '" + campaignname + "';";
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log("Result: " + result);
+
+    if (campaignname != "" || name != "") {
+      if (campaignname != "" & name == "") {
+        if (result != "") {
+          res.send("success" + JSON.stringify(result));
+        }
+        else {
+          res.send("error");
+        }
+      }
+      if (campaignname == "" & name != "") {
+        let sql = "select * from tblcampaign where txtCampaignName like '" + name + "';";
+        con.query(sql, function (err, result1) {
+          if (err) throw err;
+          console.log("Result: " + result1);
+          if (result1 != "") {
+            res.send("success" + JSON.stringify(result1));
+          }
+          else {
+            res.send("error");
+          }
+        });
+
+      }
+      if (campaignname != "" & name != "") {
+        res.send("please use Campaignname or name");
+      }
+
+
+    }
+    else {
+      res.send("campaignname or name is mandatory ");
+    }
+
+  });
+});
+
+
+
+
 app.post("/GetSingleCampaign", (req, res) => {
   let txtCampaignName = req.body.txtCampaignName;
   let sqlSinglecampaign =
@@ -240,21 +521,22 @@ app.post("/GetSingleCampaign", (req, res) => {
 
 
 
+
 app.post("/InsertSingleCampaign", (req, res) => {
   let CampaignName = req.body.CampaignName;
   let ParentCampaignName = req.body.ParentCampaignName;
-  let Status = req.body.Status;
+  let status = req.body.status;
   let Startdate = req.body.Startdate;
   let Enddate = req.body.Enddate;
   let Responses = req.body.Responses;
   let CampaignOwner = req.body.CampaignOwner;
   let sqlinsert =
-    "insert into tblcampaign (txtCampaignName,ParentCampaignName,Status,dtStartdate,dtEnddate,Responses,refCampaignOwner) VALUES('" +
+    "insert into tblcampaign (txtCampaignName,ParentCampaignName,status1,dtStartdate,dtEnddate,Responses,refCampaignOwner) VALUES('" +
     CampaignName +
     "','" +
     ParentCampaignName +
     "','" +
-    Status +
+    status +
     "','" +
     Startdate +
     "','" +
@@ -285,12 +567,175 @@ app.post("/InsertSingleCampaign", (req, res) => {
     return res;
   }
 
+
+
+
+  app.post("/UpdateSingleCampaign", (req, res) => {
+    let CampaignName = req.body.CampaignName;
+    let ParentCampaignName = req.body.ParentCampaignName;
+    let status = req.body.status;
+    let Startdate = req.body.Startdate;
+    let Enddate = req.body.Enddate;
+    let Responses = req.body.Responses;
+    let CampaignOwner = req.body.CampaignOwner;
+    let id = req.body.id;
+    let sqlupdate =
+      "UPDATE tblcampaign SET  txtCampaignName ='" +
+      CampaignName +
+      "',ParentCampaignName = '" +
+      ParentCampaignName +
+      "',status1 = '" +
+      status +
+      "',dtStartdate= '" +
+      Startdate +
+      "',dtEnddate= '" +
+      Enddate +
+      "',Responses= '" +
+      Responses +
+      "',refCampaignOwner='" +
+      CampaignOwner +
+      "'WHERE id = '" +
+      id +
+      "';";
+    if (CampaignName == "") {
+      res.send("Enter CampaignName");
+      return res;
+    }
+    if (ParentCampaignName == "") {
+      res.send("Enter ParentCampaignName");
+      return res;
+    }
+    if (Startdate == "") {
+      res.send("Enter Startdate");
+      return res;
+    }
+    if (Enddate == "") {
+      res.send("Enter Enddate");
+      return res;
+    }
+    if (CampaignOwner == "") {
+      res.send("Enter CampaignOwner");
+      return res;
+    }
+    con.query(sqlupdate, function (err, result) {
+      if (err) throw err;
+      console.log("1 record updated");
+      res.send("1 record updated");
+    });
+  });
+
   con.query(sqlinsert, function (err, result) {
     if (err) throw err;
     console.log("1 record inserted");
     res.send("1 record inserted");
   });
 });
+
+
+
+
+app.post("/getProspectlistwithfilter", (req, res) => {
+
+  let value_filter=req.body.value_filter;
+  let filtername=req.body.filtername;
+
+  con.connect(function (err) {
+      if (err) throw err;
+      console.log("Connected!");
+      
+      let sql = "select A.refConversionStatus,B.txtconversiontype from tblactivity A join tblconversiontype B on A.refConversionStatus=B.id where "+value_filter+"='"+filtername+"' or "+value_filter+" like '"+filtername+"';";
+  con.query(sql, function (err, result) {
+      if (err) throw err;
+      console.log("Result" + result);
+      res.send(result)
+  })
+})
+});
+
+
+
+
+app.post("/getsingletask", (req, res) => {
+  let id = req.body.id;
+  let sql = "select B.txtActivitytype Task,C.txtConversionType Status from tblactivity A join tblactivitytype B on A.refActivitytype=B.id join tblconversiontype C on A.refConversionStatus=C.id where A.id = '" + id + "';"
+  con.query(sql, function (err, result) {
+    if (err) throw err;
+    console.log(result);
+    if (result !== '') {
+      res.send("Task Exists" + JSON.stringify(result))
+      return
+    }
+    else {
+      res.send(" Task does not Exist")
+      return
+    }
+  })
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -330,229 +775,7 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
-app.post("/userlistwithfilter", (req, res) => {
-  let firstname = req.body.firstname;
-  let lastname = req.body.lastname;
-  let email = req.body.email;
-  let dob = req.body.dob;
-  let address = req.body.address;
-  let sql1 = "select txtFirstName as FirstName from tblusers;"
-  let sql2 = "select txtLastName as Lastname from tblusers;"
-  let sql3 = "select txtEmail as Email from tblusers;"
-  let sql4 = "select txtdob as DOB from tblusers;"
-  let sql5 = "select txtAddress as Address from tblusers;"
-  let sql6 = "select txtFirstName,txtLastName from tblusers;"
-  let sql7 = "select txtFirstName,txtEmail from tblusers;"
-  let sql8 = "select txtFirstName,dob from tblusers;"
-  let sql9 = "select txtFirstName,txtAddress from tblusers;"
-  let sql10 = "select txtLastName,txtEmail from tblusers;"
-  let sql11 = "select txtLastName,txtdob from tblusers;"
-  let sql12 = "select txtLastName,txtAddress from tblusers;"
-  let sql13 = "select txtdob,txtAddress from tblusers;"
-  let sql14 = "select txtFirstName,txtLastName,txtEmail from tblusers;"
-  let sql15 = "select txtFirstName,txtLastName,txtdob from tblusers;"
-  let sql16 = "select txtFirstName,txtLastName,txtAddress from tblusers;"
-  let sql17 = "select txtLastName,txtEmail,txtdob from tblusers;"
-  let sql18 = "select txtLastName,txtEmail,txtAddress from tblusers;"
-  let sql19 = "select txtLastName,txtdob,txtAddress from tblusers;"
-  let sql20 = "select txtEmail,txtdob,txtAddress from tblusers;"
-  let sql21 = "select txtFirstName,txtLastName,txtEmail,txtdob from tblusers;"
-  let sql22 = "select txtFirstName,txtLastName,txtEmail,txtAddress from tblusers;"
-  let sql23 = "select txtFirstName,txtLastName,txtAddress,txtdob from tblusers;"
-  let sql24 = "select txtFirstName,txtLastName,txtEmail,txtdob,txtAddress from tblusers;"
-  if (firstname == "" & lastname == "" & email == "" & dob == "" & address == "") {
-    con.query(sql24, function (err, result24) {
-      if (err) throw err;
-      else {
-        res.send(JSON.stringify(result24))
-      }
-    })
-  }
-  else if (firstname == "" & lastname == "" & dob == "" & address == "") {
-    con.query(sql23, function (err, result23) {
-      if (err) throw err;
-      else {
-        res.send(JSON.stringify(result23))
-      }
-    })
-  }
-  else if (firstname == "" & lastname == "" & email == "" & address == "") {
-    con.query(sql22, function (err, result22) {
-      if (err) throw err;
-      else {
-        res.send(JSON.stringify(result22))
-      }
-    })
-  }
-  else if (firstname == "" & lastname == "" & email == "" & dob == "") {
-    con.query(sql21, function (err, result21) {
-      if (err) throw err;
-      else {
-        res.send(JSON.stringify(result21))
-      }
-    })
-  }
-  else if (email == "" & dob == "" & address == "") {
-    con.query(sql20, function (err, result20) {
-      if (err) throw err;
-      else {
-        res.send(JSON.stringify(result20))
-      }
-    })
-  }
-  else if (lastname == "" & dob == "" & address == "") {
-    con.query(sql19, function (err, result19) {
-      if (err) throw err;
-      else {
-        res.send(JSON.stringify(result19))
-      }
-    })
-  }
-  else if (lastname == "" & email == "" & address == "") {
-    con.query(sql18, function (err, result18) {
-      if (err) throw err;
-      else {
-        res.send(JSON.stringify(result18))
-      }
-    })
-  }
-  else if (lastname == "" & email == "" & dob == "") {
-    con.query(sql17, function (err, result17) {
-      if (err) throw err;
-      else {
-        res.send(JSON.stringify(result17))
-      }
-    })
-  }
-  else if (firstname == "" & lastname == "" & address == "") {
-    con.query(sql16, function (err, result16) {
-      if (err) throw err;
-      else {
-        res.send(JSON.stringify(result16))
-      }
-    })
-  }
-  else if (firstname == "" & lastname == "" & dob == "") {
-    con.query(sql15, function (err, result15) {
-      if (err) throw err;
-      else {
-        res.send(JSON.stringify(result15))
-      }
-    })
-  }
-  else if (firstname == "" & lastname == "" & email == "") {
-    con.query(sql14, function (err, result14) {
-      if (err) throw err;
-      else {
-        res.send(JSON.stringify(result14))
-      }
-    })
-  }
-  else if (dob == "" & address == "") {
-    con.query(sql13, function (err, result13) {
-      if (err) throw err;
-      else {
-        res.send(JSON.stringify(result13))
-      }
-    })
-  }
-  else if (lastname == "" & address == "") {
-    con.query(sql12, function (err, result12) {
-      if (err) throw err;
-      else {
-        res.send(JSON.stringify(result12))
-      }
-    })
-  }
-  else if (lastname == "" & dob == "") {
-    con.query(sql11, function (err, result11) {
-      if (err) throw err;
-      else {
-        res.send(JSON.stringify(result11))
-      }
-    })
-  }
-  else if (lastname == "" & email == "") {
-    con.query(sql10, function (err, result10) {
-      if (err) throw err;
-      else {
-        res.send(JSON.stringify(result10))
-      }
-    })
-  }
-  else if (firstname == "" & address == "") {
-    con.query(sql9, function (err, result9) {
-      if (err) throw err;
-      else {
-        res.send(JSON.stringify(result9))
-      }
-    })
-  }
-  else if (firstname == "" & dob == "") {
-    con.query(sql8, function (err, result8) {
-      if (err) throw err;
-      else {
-        res.send(JSON.stringify(result8))
-      }
-    })
-  }
-  else if (firstname == "" & email == "") {
-    con.query(sql7, function (err, result7) {
-      if (err) throw err;
-      else {
-        res.send(JSON.stringify(result7))
-      }
-    })
-  }
-  else if (firstname == "" & lastname == "") {
-    con.query(sql6, function (err, result6) {
-      if (err) throw err;
-      else {
-        res.send(JSON.stringify(result6))
-      }
-    })
-  }
-  else if (address == "") {
-    con.query(sql5, function (err, result5) {
-      if (err) throw err;
-      else {
-        res.send(JSON.stringify(result5))
-      }
-    })
-  }
-  else if (dob == "") {
-    con.query(sql4, function (err, result4) {
-      if (err) throw err;
-      else {
-        res.send(JSON.stringify(result4))
-      }
-    })
-  }
-  else if (email == "") {
-    con.query(sql3, function (err, result3) {
-      if (err) throw err;
-      else {
-        res.send(JSON.stringify(result3))
-      }
-    })
-  }
-  else if (lastname == "") {
-    con.query(sql2, function (err, result2) {
-      if (err) throw err;
-      else {
-        res.send(JSON.stringify(result2))
-      }
-    })
-  }
-  else if (firstname == "") {
-    con.query(sql1, function (err, result1) {
-      if (err) throw err;
-      else {
-        res.send(JSON.stringify(result1))
-      }
-    })
-  }
-  else {
-    res.send("Please select valid filters!")
-  }
-});
+
+
+
+
