@@ -2,14 +2,31 @@ import "./Login.css";
 import logo from "./images/logo.png"
 import { useNavigate } from 'react-router-dom';
 import { useState } from "react";
-import Admin from "./Admin";
+import axios from "axios";
 export default function Login() {
-    const navigate = useNavigate();
-    function login() {
-        navigate("/Admin")
+    const Navigate = useNavigate();
+    const loginclick = (e) => {
+        // alert("HI!")
+        const url = "http://localhost:3000/dev/login";
+        const data = { email: email, password: password };
+        const header = {}
+        axios.post(url, data, { headers: header })
+            .then((res) => {
+                console.log("Response => " + JSON.stringify(res.data))
+                if (res.data === "Login details incorrect!")
+                    alert("Login details incorrect!")
+                else if (res.data === "Both the fields are mandatory") {
+                    alert("Both the fields are mandatory")
+                }
+                else
+                    Navigate("/AdminDash")
+            })
+            .catch((err) => {
+                console.log("Error => " + err)
+            })
     }
     function signup() {
-        navigate("/signup");
+        Navigate("/signup");
     }
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -29,11 +46,9 @@ export default function Login() {
                     </div>
                     <div className="Login_outer_row1_inner_row4">
                         <input type="text" placeholder="Email" onChange={(e) => { setEmail(e.target.value) }} />
-                        <label> {email} </label>
                     </div>
                     <div className="Login_outer_row1_inner_row5">
                         <input type="Password" placeholder="Password" onChange={(e) => { setPassword(e.target.value) }} />
-                        <label>{password}</label>
                     </div>
                     <div className="Login_outer_row1_inner_row6">
                         <input type="checkbox" />
@@ -43,7 +58,7 @@ export default function Login() {
                         </div>
                     </div>
                     <div className="Login_outer_row1_inner_row7">
-                        <label onClick={login}>LOGIN</label>
+                        <label onClick={(e) => { loginclick(e) }}>LOGIN</label>
                     </div>
                 </div>
             </div>
