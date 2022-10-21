@@ -33,7 +33,7 @@ export default function Topbar() {
                         <div className="Tobar_col2_on" onClick={(e) => { handleclick(e) }}><li>leads</li></div>
                         <div className="Tobar_col2_on1" onClick={(e) => { handleclick(e) }}><li>campaigns</li></div>
                         <div className="Tobar_col2_on2" onClick={(e) => { handleclick(e) }}><li>prospect</li></div>
-                        <li>
+                        <li className="topbar_3dots">
                             <BsThreeDots />
                         </li>
                     </ul>
@@ -45,7 +45,7 @@ export default function Topbar() {
                 </div>
                 <div className="Topbar_col4">
                     <CgProfile className="Topbar_profileIcon" />
-                    <label>Clayton Santos</label>
+                    <div className="Topbar_col4_label">Clayton Santos</div>
                 </div>
                 <div className="Topbar_col5">
                     <div className="Topbar_Bell_Circle">

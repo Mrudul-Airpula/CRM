@@ -4,17 +4,21 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import axios from "axios";
 import { useState } from "react";
 export default function Summary() {
-    const [genman, setGenMan] = useState(18);
-    const [areaman, setAreaMan ] = useState(12);
-    const [assisman, setAssisMan] = useState(32);
-    const [salesman, setSalesMan] = useState(32);
+    const [genman, setGenMan] = useState();
+    const [areaman, setAreaMan ] = useState();
+    const [assisman, setAssisMan] = useState();
+    const [salesman, setSalesMan] = useState();
     useEffect(()=>{
         const url = "http://localhost:3000/dev/ManagerwiseProspectCount";
         const data = {};
         const header = {};
         axios.post(url, data, {Headers:header})
         .then((res)=>{
-            console.log("Response => " + JSON.stringify(res.data))
+            console.log("Response => " + JSON.stringify(res.data[0].Mancount))
+            setAssisMan(res.data[0].Mancount)
+            setAreaMan(0)
+            setGenMan(0)
+            setSalesMan(0)
         })
         .catch((err)=>{
             console.log("Error => "+ err)

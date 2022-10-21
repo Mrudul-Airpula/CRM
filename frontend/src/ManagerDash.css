@@ -22,6 +22,7 @@
 }
 
 .ManagerDash_page_content_area_row2{
+    /* background-color: aqua; */
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -30,10 +31,11 @@
 }
 
 .ManagerDash_page_content_area_row2_bars{
+    /* background-color: brown; */
     padding-top: 50px;
     padding-bottom: 0;
     padding-left: 50px;
     padding-right: 50px;
     margin-right: 50px;
-    margin-left: 50px;
+    margin-left: 200px;
 }

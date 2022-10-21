@@ -1,8 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import ManagerDash from './ManagerDash';
+// import ManagerDash from './ManagerDash';
 // import AdminDash from './AdminDash';
-// import Navigation from './Navigation';
+import Navigation from './Navigation';
 // import SalesDash from './SalesDash';
 // import VericalGraph from './VerticalGraph';
 // import HorizontalGraph from './HorizontalGraph';
@@ -17,6 +17,6 @@ import ManagerDash from './ManagerDash';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ManagerDash />
+    <Navigation />
   </React.StrictMode>
 );

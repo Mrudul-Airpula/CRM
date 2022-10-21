@@ -1,5 +1,6 @@
 .bargraph {
-    background-color: #f7f8fa;
+    /* background-color: #f3f3f4; */
+    background-color: blueviolet;
     display: flex;
     flex-direction: column;
     padding: 20px;

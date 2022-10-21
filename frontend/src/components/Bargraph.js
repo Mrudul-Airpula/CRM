@@ -4,7 +4,9 @@ import { useState } from "react";
 import axios from "axios";
 export default function Bargraph() {
     const [bluecamp, setBlueCamp] = useState("");
-    const [blueheight, setBlueHeight] = useState([]);
+    const [blueheight, setBlueHeight] = useState(0);
+    const [greenheight, setGreenHeight] = useState(0);
+    const [orangeheight, setOrangeHeight] = useState(0)
     const url = "http://localhost:3000/dev/campaignwiseprospectcount";
     const data = {};
     const header = {};
@@ -17,6 +19,7 @@ export default function Bargraph() {
         .catch((err) => {
             console.log("Error => " + err)
         })
+
     return <>
         <div className="bargraph">
             <div className="bargraph_title">
@@ -29,17 +32,17 @@ export default function Bargraph() {
                 <ul>
                     <li>
                         <label className="bargraph_blue_value">{blueheight}</label>
-                        <div className="bargraph_bluegraph" style={{ height: `${blueheight}%` }}></div>
+                        <div className="bargraph_bluegraph" style={{ height: `${blueheight}vh` }}></div>
                         <label className="bargraph_blue_name">{bluecamp}</label>
                     </li>
                     <li>
-                        <label className="bargraph_green_value">7</label>
-                        <div className="bargraph_greengraph" ></div>
+                        <label className="bargraph_green_value">{greenheight}</label>
+                        <div className="bargraph_greengraph" style={{ height: `${greenheight}vh` }} ></div>
                         <label className="bargraph_green_name">Cam 2</label>
                     </li>
                     <li>
-                        <label className="bargraph_orange_value">10</label>
-                        <div className="bargraph_orangegraph" ></div>
+                        <label className="bargraph_orange_value">{orangeheight}</label>
+                        <div className="bargraph_orangegraph" style={{ height: `${orangeheight}%` }}></div>
                         <label className="bargraph_orange_name">Cam 3</label>
                     </li>
                 </ul>

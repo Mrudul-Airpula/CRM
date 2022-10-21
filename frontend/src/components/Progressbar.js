@@ -14,6 +14,9 @@ ChartJS.register(ArcElement, Tooltip, Legend);
 export default function Login() {
   const [leads, setLeads] = useState([])
   const [pros, setPros] = useState([])
+  var per=(pros/leads)*100;
+  var per1=per.toFixed(2)
+  
   useEffect(() => {
     const url = "http://localhost:3000/dev/prospectprogress";
     // const data = {};
@@ -29,11 +32,12 @@ export default function Login() {
       })
   })
   const data = {
+   
     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
     datasets: [
       {
         label: "# of Votes",
-        data: [{leads}, {pros}],
+        data: [pros, leads],
         backgroundColor: [
           "#8833ff",
           "rgba(54, 162, 235, 0.2)",
@@ -73,7 +77,7 @@ export default function Login() {
             <div
               className="test"
               style={{
-                backgroundColor: "#FAFAFA",
+                backgroundColor: "#F3F3F4",
                 position: "absolute",
                 width: "115px",
                 height: "115px",
@@ -87,7 +91,7 @@ export default function Login() {
                 fontFamily: "Arial,Helvetica,Sans-serif"
               }}
             >
-              76%
+              {per1}%
             </div>
             <Doughnut
               options={{ plugins: { legend: { display: false } } }}

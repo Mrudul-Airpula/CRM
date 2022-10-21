@@ -2,7 +2,7 @@
     /* background-color: yellowgreen; */
     margin-top: 50px;
     margin-left: 50px;
-    background-color: #FAFAFA;
+    background-color: #f3f3f4;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -28,7 +28,7 @@
 }
 
 .bargraph .icon {
-    padding-left: 40px;
+    padding-left: 20px;
     color: #4D5E80;
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
@@ -84,13 +84,12 @@
 .bargraph_bluegraph {
     background-color: blue;
     width: 25px;
-    margin-top: 10px;
+    margin-top: 5px;
     margin-bottom: 10px;
 }
 
 .bargraph_greengraph {
     background-color: green;
-    height: 80px;
     width: 25px;
     margin-top: 10px;
     margin-bottom: 10px;
@@ -98,7 +97,6 @@
 
 .bargraph_orangegraph {
     background-color: orangered;
-    height: 120px;
     width: 25px;
     margin-top: 10px;
     margin-bottom: 10px;
