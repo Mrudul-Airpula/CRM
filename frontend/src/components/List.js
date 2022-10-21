@@ -4,7 +4,7 @@ import { BsThreeDotsVertical, BsBellFill } from "react-icons/bs";
 import "./List.css";
 export default function List() {
     const [user, setUser] = useState([]);
-    const url = "http://localhost:3000/dev/getuserlist";
+    const url = "https://y64ha1qk80.execute-api.us-east-1.amazonaws.com/dev/getuserlist";
     const data = {};
     const header = {};
     axios.post(url, data, { headers: header })

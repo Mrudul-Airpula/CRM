@@ -7,7 +7,7 @@ export default function Bargraph() {
     const [blueheight, setBlueHeight] = useState(0);
     const [greenheight, setGreenHeight] = useState(0);
     const [orangeheight, setOrangeHeight] = useState(0)
-    const url = "http://localhost:3000/dev/campaignwiseprospectcount";
+    const url = "https://y64ha1qk80.execute-api.us-east-1.amazonaws.com/dev/campaignwiseprospectcount";
     const data = {};
     const header = {};
     axios.post(url, data, { Headers: header })

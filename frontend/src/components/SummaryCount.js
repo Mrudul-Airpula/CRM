@@ -6,7 +6,7 @@ import './SummaryCount.css';
 export default function SummaryCount() {
     const [pcount, setPcount] = useState("");
     useEffect(() => {
-        const url = "http://localhost:3000/dev/prospectGrowth";
+        const url = "https://y64ha1qk80.execute-api.us-east-1.amazonaws.com/dev/prospectGrowth";
         const data = {};
         const Header = {};
         axios.post(url, data, { Headers: Header })
