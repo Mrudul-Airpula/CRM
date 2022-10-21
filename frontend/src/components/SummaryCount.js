@@ -1,25 +1,10 @@
 
-import axios from "axios";
-import React, { useState } from "react";
-import { useEffect } from "react";
+// import axios from "axios";
+import React from "react";
+// import { useEffect, useState } from "react";
 import './SummaryCount.css';
 export default function SummaryCount() {
-    const [pcount, setPcount] = useState("");
-    useEffect(() => {
-        const url = "https://y64ha1qk80.execute-api.us-east-1.amazonaws.com/dev/prospectGrowth";
-        const data = {};
-        const Header = {};
-        axios.post(url, data, { Headers: Header })
-            .then((res) => {
-                setPcount(JSON.stringify(res.data[0].count))
-                console.log("Response ==> " + JSON.stringify(res.data[0].count))
-                
-            })
-            .catch((err) => {
-                console.log("Error ==> " + err)
-            })
-    })
-
+    const pcount = localStorage.getItem("prospectcount")
     return (
         <>
             <div className="summarycount_outer">

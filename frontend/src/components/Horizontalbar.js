@@ -8,7 +8,8 @@ export default function Horizontalbar() {
     const [orangebar, setOrangebar] = useState([]);
     const [greenbar, setGreenbar] = useState([]);
     const [bluebar, setBluebar] = useState([]);
-    const url = "https://y64ha1qk80.execute-api.us-east-1.amazonaws.com/dev/leadsfunnel";
+    const url = "http://localhost:3000/dev/leadsfunnel";
+    // const url = "https://y64ha1qk80.execute-api.us-east-1.amazonaws.com/dev/leadsfunnel";
     const data = {};
     const header = {};
     axios.post(url, data, { Headers: header })

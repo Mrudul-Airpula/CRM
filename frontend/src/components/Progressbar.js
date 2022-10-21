@@ -14,7 +14,8 @@ export default function Login() {
   var per1=per.toFixed(2)
   
   useEffect(() => {
-    const url = "https://y64ha1qk80.execute-api.us-east-1.amazonaws.com/dev/prospectprogress";
+    const url = "http://localhost:3000/dev/prospectprogress";
+    // const url = "https://y64ha1qk80.execute-api.us-east-1.amazonaws.com/dev/prospectprogress";
     const header = {};
     axios.post(url, { Headers: header })
       .then((res) => {
