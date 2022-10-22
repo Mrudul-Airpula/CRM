@@ -1,55 +1,38 @@
-import React, { useEffect } from "react";
+import React from "react";
 import "./Summary.css";
 import { BsThreeDotsVertical } from "react-icons/bs";
-import axios from "axios";
-import { useState } from "react";
+
 export default function Summary() {
-    const [genman, setGenMan] = useState();
-    const [areaman, setAreaMan ] = useState();
-    const [assisman, setAssisMan] = useState();
-    const [salesman, setSalesMan] = useState();
-    useEffect(()=>{
-        const url = "http://localhost:3000/dev/ManagerwiseProspectCount";
-        // const url = "https://y64ha1qk80.execute-api.us-east-1.amazonaws.com/dev/ManagerwiseProspectCount";
-        const data = {};
-        const header = {};
-        axios.post(url, data, {Headers:header})
-        .then((res)=>{
-            console.log("Response => " + JSON.stringify(res.data[0].Mancount))
-            setAssisMan(res.data[0].Mancount)
-            setAreaMan(0)
-            setGenMan(0)
-            setSalesMan(0)
-        })
-        .catch((err)=>{
-            console.log("Error => "+ err)
-        })
-    })
+    // localStorage.getItem("salescount")
+    // localStorage.getItem("assiscount")
+    // localStorage.getItem("areacount")
+    // localStorage.getItem("gencount")
+
     return (
         <>
             <div className="summary">
                 <div className="summary_row1">
                     <label>Manager wise Prospect Count</label>
-                    <BsThreeDotsVertical className="icon" />{" "}
+                    <BsThreeDotsVertical className="icon" />
                 </div>
                 <div className="summary_row">
                     <div className="summary_single">
                         <label> General Manager</label>
-                        <label className="summary_value">{genman}</label>
+                        <label className="summary_value">0</label>
                     </div>
                     <div className="summary_single">
                         <label>Area Manager</label>
-                        <label className="summary_value">{areaman}</label>
+                        <label className="summary_value">0</label>
                     </div>
                     <div className="summary_single">
                         <label>Assistant Manager</label>
-                        <label className="summary_value">{assisman}</label>
+                        <label className="summary_value">0</label>
                     </div>
                 </div> 
                 <div className="summary_row">
                     <div className="summary_single">
                         <label>Sales Manager</label>
-                        <label className="summary_value">{salesman}</label>
+                        <label className="summary_value">0</label>
                     </div>
                     {/* <div className="summary_single">
                         <label>Manager1</label>

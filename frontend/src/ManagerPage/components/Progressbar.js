@@ -1,39 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import "./Progressbar.css";
 import { AiOutlineMore } from "react-icons/ai";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Doughnut } from "react-chartjs-2";
-import axios from 'axios';
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 
-export default function Login() {
-  const [leads, setLeads] = useState([])
-  const [pros, setPros] = useState([])
-  var per=(pros/leads)*100;
-  var per1=per.toFixed(2)
-  
-  useEffect(() => {
-    const url = "http://localhost:3000/dev/prospectprogress";
-    // const url = "https://y64ha1qk80.execute-api.us-east-1.amazonaws.com/dev/prospectprogress";
-    const header = {};
-    axios.post(url, { Headers: header })
-      .then((res) => {
-        console.log("Response => " + JSON.stringify(res.data[0].Leads) + JSON.stringify(res.data[1].Leads))
-        setLeads(res.data[0].Leads)
-        setPros(res.data[1].Leads)
-      })
-      .catch((err) => {
-        console.log("Error => " + err)
-      })
-  })
+export default function Progressbar() {
+
+  const leads = localStorage.getItem("leads")
+  const pros = localStorage.getItem("pros")
+  var per = (pros / leads) * 100;
+  var per1 = per.toFixed(2)
+
+
   const data = {
-   
+
     labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
     datasets: [
       {
         label: "# of Votes",
-        data: [pros, leads],
+        data: [{ pros }, { leads }],
         backgroundColor: [
           "#8833ff",
           "rgba(54, 162, 235, 0.2)",

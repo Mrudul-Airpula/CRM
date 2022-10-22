@@ -1,22 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import AdminDash from './AdminDash';
-// import ManagerDash from './ManagerDash';
-// import Navigation from './Navigation';
-// import SalesDash from './SalesDash';
-// import VericalGraph from './VerticalGraph';
-// import HorizontalGraph from './HorizontalGraph';
-// import DoughnutGraph from './DoughnutGraph';
-// import Otp from './Otp';
-// import SummaryC from './SummaryC';
-// import Modal from './Modal';
-// import Leads from './Leads';
-// import Test from './Test';
-// import Admin from './Admin';
+import Navigation from "./Navigation";
+// import AdminDash from './AdminPage/AdminDash';
+// import ManagerDash from './ManagerPage/ManagerDash';
+
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <AdminDash />
+    <Navigation />
   </React.StrictMode>
 );

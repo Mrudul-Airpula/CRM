@@ -1,10 +1,7 @@
-
-// import axios from "axios";
 import React from "react";
-// import { useEffect, useState } from "react";
 import './SummaryCount.css';
-export default function SummaryCount() {
-    const pcount = localStorage.getItem("prospectcount")
+export default function SummaryCount({ pcount }) {
+
     return (
         <>
             <div className="summarycount_outer">

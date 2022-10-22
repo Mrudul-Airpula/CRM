@@ -2,26 +2,14 @@ import React from "react";
 import { FaDollarSign } from "react-icons/fa";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import "./Horizontalbar.css"
-import { useState } from "react";
-import axios from "axios";
+
+
 export default function Horizontalbar() {
-    const [orangebar, setOrangebar] = useState([]);
-    const [greenbar, setGreenbar] = useState([]);
-    const [bluebar, setBluebar] = useState([]);
-    const url = "http://localhost:3000/dev/leadsfunnel";
-    // const url = "https://y64ha1qk80.execute-api.us-east-1.amazonaws.com/dev/leadsfunnel";
-    const data = {};
-    const header = {};
-    axios.post(url, data, { Headers: header })
-        .then((res) => {
-            console.log("Response => " + (JSON.stringify(res.data[0].leadscount)) + (JSON.stringify(res.data[1].leadscount)) + (JSON.stringify(res.data[2].leadscount)))
-            setOrangebar(res.data[0].leadscount)
-            setGreenbar(res.data[1].leadscount)
-            setBluebar(res.data[2].leadscount)
-        })
-        .catch((err) => {
-            console.log("Error => " + err)
-        })
+
+    const orangebar = localStorage.getItem("orange")
+    const greenbar = localStorage.getItem("green")
+    const bluebar = localStorage.getItem("blue")
+
     return (
         <>
             <div className="Horizontalbar_main">
@@ -44,15 +32,15 @@ export default function Horizontalbar() {
                     <ul>
                         <li>
                             <label className="Horizontalbar_graph_orange_label">Leads</label>
-                            <div className="Horizontalbar_graph_orange" style={{ width: `${orangebar}%` }}></div>
+                            <div className="Horizontalbar_graph_orange" style={{ width: `${orangebar}%` }} ></div>
                         </li>
                         <li>
                             <label>Nurturing</label>
-                            <div className="Horizontalbar_graph_green" style={{ width: `${greenbar}%` }}></div>
+                            <div className="Horizontalbar_graph_green" style={{ width: `${greenbar}%` }} ></div>
                         </li>
                         <li>
                             <label>Prospects</label>
-                            <div className="Horizontalbar_graph_blue" style={{ width: `${bluebar}%` }}></div>
+                            <div className="Horizontalbar_graph_blue" style={{ width: `${bluebar}%` }} ></div>
                         </li>
                     </ul>
                 </div>

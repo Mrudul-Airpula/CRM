@@ -1,0 +1,42 @@
+.summarycount_outer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.summarycount_inner {
+    background-color: #f3f3f4;
+    min-width: 100px;
+    width: 10%;
+    display: flex;
+    flex-direction: column;
+    padding: 35px;
+    border-radius: 5px;
+}
+
+.summarycount_label {
+    font-size: small;
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: row;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+.summarycount_inner label{
+    color: #4D5E80;
+    font-family: Arial, Helvetica, sans-serif;
+    /* font-weight: bold; */
+}
+
+.summarycount_inner_row1 {
+    margin-bottom: 50px;
+    color: #4D5E80;
+    font-size: large;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.summarycount_inner_row2 {
+    font-size: x-large;
+    font-family: Arial, Helvetica, sans-serif;
+}
