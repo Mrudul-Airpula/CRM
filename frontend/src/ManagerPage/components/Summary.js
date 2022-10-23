@@ -2,11 +2,7 @@ import React from "react";
 import "./Summary.css";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
-export default function Summary() {
-    // localStorage.getItem("salescount")
-    // localStorage.getItem("assiscount")
-    // localStorage.getItem("areacount")
-    // localStorage.getItem("gencount")
+export default function Summary({ genc, salesc, areac, assisc }) {
 
     return (
         <>
@@ -18,21 +14,21 @@ export default function Summary() {
                 <div className="summary_row">
                     <div className="summary_single">
                         <label> General Manager</label>
-                        <label className="summary_value">0</label>
+                        <label className="summary_value">{genc}</label>
                     </div>
                     <div className="summary_single">
                         <label>Area Manager</label>
-                        <label className="summary_value">0</label>
+                        <label className="summary_value">{areac}</label>
                     </div>
                     <div className="summary_single">
                         <label>Assistant Manager</label>
-                        <label className="summary_value">0</label>
+                        <label className="summary_value">{assisc}</label>
                     </div>
-                </div> 
+                </div>
                 <div className="summary_row">
                     <div className="summary_single">
                         <label>Sales Manager</label>
-                        <label className="summary_value">0</label>
+                        <label className="summary_value">{salesc}</label>
                     </div>
                     {/* <div className="summary_single">
                         <label>Manager1</label>

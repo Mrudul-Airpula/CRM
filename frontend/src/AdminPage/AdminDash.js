@@ -15,24 +15,26 @@ export default function AdminDash() {
 
     const [pcount, setPcount] = useState("");
 
-    // const [orangebar, setOrangebar] = useState([]);
-    // const [greenbar, setGreenbar] = useState([]);
-    // const [bluebar, setBluebar] = useState([]);
+    const [orangebar, setOrangebar] = useState([]);
+    const [greenbar, setGreenbar] = useState([]);
+    const [bluebar, setBluebar] = useState([]);
 
-    // const [leads, setLeads] = useState([])
-    // const [pros, setPros] = useState([])
+    const [leads, setLeads] = useState([]);
+    const [pros, setPros] = useState([]);
 
-    // const [bluecamp, setBlueCamp] = useState([]);
-    // const [blueheight, setBlueHeight] = useState([]);
-    // const [greenheight, setGreenHeight] = useState([]);
-    // const [orangeheight, setOrangeHeight] = useState([]);
+    const [bluecamp, setBlueCamp] = useState([]);
+    const [blueheight, setBlueHeight] = useState(0);
+    const [greenheight, setGreenHeight] = useState(0);
+    const [orangeheight, setOrangeHeight] = useState(0);
 
-    // const [genman, setGenMan] = useState();
-    // const [areaman, setAreaMan ] = useState();
-    // const [assisman, setAssisMan] = useState();
-    // const [salesman, setSalesMan] = useState();
+    const [genman, setGenMan] = useState(0);
+    const [areaman, setAreaMan] = useState(0);
+    const [assisman, setAssisMan] = useState(0);
+    const [salesman, setSalesMan] = useState(0);
 
     const [user, setUser] = useState([]);
+
+    //ProspectGrowth Axios
 
     useEffect(() => {
         const url = "http://localhost:3000/dev/prospectGrowth";
@@ -49,6 +51,8 @@ export default function AdminDash() {
             })
     })
 
+    //LeadsFunnel Axios
+
     useEffect(() => {
         const url = "http://localhost:3000/dev/leadsfunnel";
         // const url = "https://y64ha1qk80.execute-api.us-east-1.amazonaws.com/dev/leadsfunnel";
@@ -57,17 +61,16 @@ export default function AdminDash() {
         axios.post(url, data, { Headers: header })
             .then((res) => {
                 console.log("Response => " + (JSON.stringify(res.data[0].leadscount)) + (JSON.stringify(res.data[1].leadscount)) + (JSON.stringify(res.data[2].leadscount)))
-                // setOrangebar(res.data[0].leadscount)
-                // setGreenbar(res.data[1].leadscount)
-                // setBluebar(res.data[2].leadscount)
-                localStorage.setItem("orange", res.data[0].leadscount)
-                localStorage.setItem("green", res.data[1].leadscount)
-                localStorage.setItem("blue", res.data[2].leadscount)
+                setOrangebar(res.data[0].leadscount)
+                setGreenbar(res.data[1].leadscount)
+                setBluebar(res.data[2].leadscount)
             })
             .catch((err) => {
                 console.log("Error => " + err)
             })
     })
+
+    //ProspectProgress Axios
 
     useEffect(() => {
         const url = "http://localhost:3000/dev/prospectprogress";
@@ -76,16 +79,15 @@ export default function AdminDash() {
         axios.post(url, { Headers: header })
             .then((res) => {
                 console.log("Response => " + JSON.stringify(res.data[0].Leads) + JSON.stringify(res.data[1].Leads))
-                // setLeads(res.data[0].Leads)
-                // setPros(res.data[1].Leads)
-                localStorage.setItem("leads", res.data[0].Leads)
-                localStorage.setItem("pros", res.data[1].Leads)
+                setLeads(res.data[0].Leads)
+                setPros(res.data[1].Leads)
             })
             .catch((err) => {
                 console.log("Error => " + err)
             })
     })
 
+    //ManagerWiseProspectCount Axios
 
     useEffect(() => {
         const url = "http://localhost:3000/dev/ManagerwiseProspectCount";
@@ -94,16 +96,14 @@ export default function AdminDash() {
         const header = {};
         axios.post(url, data, { Headers: header })
             .then((res) => {
-                console.log("Response => " + JSON.stringify(res.data[0].Mancount))
-                // setAssisMan(res.data[0].Mancount)
-                // setAreaMan(0)
-                // setGenMan(0)
-                // setSalesMan(0)
+                console.log("Response => " + JSON.stringify(res.data))
             })
             .catch((err) => {
                 console.log("Error => " + err)
             })
     })
+
+    //CampaignWiseProspectCount Axios
 
     useEffect(() => {
         const url = "http://localhost:3000/dev/campaignwiseprospectcount";
@@ -113,10 +113,8 @@ export default function AdminDash() {
         axios.post(url, data, { Headers: header })
             .then((res) => {
                 console.log("Response => " + JSON.stringify(res.data[0].count))
-                // setBlueHeight(res.data[0].count)
-                // setBlueCamp(res.data[0].txtCampaignName)
-                localStorage.setItem("blueheight", res.data[0].count)
-                localStorage.setItem("bluename", res.data[0].txtCampaignName)
+                setBlueHeight(res.data[0].count)
+                setBlueCamp(res.data[0].txtCampaignName)
             })
             .catch((err) => {
                 console.log("Error => " + err)
@@ -154,16 +152,16 @@ export default function AdminDash() {
                 </div>
                 <div className='Admin_page_contentpart_main'>
                     <div className='Admin_page_contentpart_main_row1'>
-                        <Bargraph />
-                        <Horizontalbar />
+                        <Bargraph orangeh={orangeheight} greenh={greenheight} blueh={blueheight} bluec={bluecamp} />
+                        <Horizontalbar orange={orangebar} green={greenbar} blue={bluebar} />
                     </div>
                     <div className='Admin_page_contentpart_main_row2'>
                         <div className="Admin_page_contentpart_main_row2_innerrow1">
-                            <Summary />
+                            <Summary genc={genman} assisc={assisman} salesc={salesman} areac={areaman} />
                         </div>
                         <div className="Admin_page_contentpart_main_row2_innerrow2">
                             <SummaryCount pcount={pcount} />
-                            <Progressbar />
+                            <Progressbar leadsc={leads} prosc={pros} />
                         </div>
                     </div>
                 </div>

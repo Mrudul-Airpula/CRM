@@ -1,9 +1,7 @@
 import "./Bargraph.css";
 import { BsThreeDotsVertical } from "react-icons/bs";
-export default function Bargraph() {
 
-    const blueheight = localStorage.getItem("blueheight")
-    const bluename = localStorage.getItem("bluename")
+export default function Bargraph({ blueh, greenh, orangeh, bluec }) {
 
     return <>
         <div className="bargraph">
@@ -16,20 +14,20 @@ export default function Bargraph() {
             <div className="bargraph_graph">
                 <ul>
                     <li>
-                        <label className="bargraph_blue_value">{blueheight}</label>
-                        <div className="bargraph_bluegraph" style={{ height: `${blueheight}vh` }}></div>
-                        <label className="bargraph_blue_name">{bluename}</label>
+                        <label className="bargraph_blue_value">{blueh}</label>
+                        <div className="bargraph_bluegraph" style={{ height: `${blueh}vh` }}></div>
+                        <label className="bargraph_blue_name">{bluec}</label>
                     </li>
-                    {/* <li>
-                        <label className="bargraph_green_value">{greenheight}</label>
-                        <div className="bargraph_greengraph" style={{ height: `${greenheight}vh` }} ></div>
+                    <li>
+                        <label className="bargraph_green_value">{greenh}</label>
+                        <div className="bargraph_greengraph" style={{ height: `${greenh}vh` }} ></div>
                         <label className="bargraph_green_name">Cam 2</label>
                     </li>
                     <li>
-                        <label className="bargraph_orange_value">{orangeheight}</label>
-                        <div className="bargraph_orangegraph" style={{ height: `${orangeheight}%` }}></div>
+                        <label className="bargraph_orange_value">{orangeh}</label>
+                        <div className="bargraph_orangegraph" style={{ height: `${orangeh}%` }}></div>
                         <label className="bargraph_orange_name">Cam 3</label>
-                    </li> */}
+                    </li>
                 </ul>
             </div>
         </div>

@@ -4,11 +4,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import "./Horizontalbar.css"
 
 
-export default function Horizontalbar() {
-
-    const orangebar = localStorage.getItem("orange")
-    const greenbar = localStorage.getItem("green")
-    const bluebar = localStorage.getItem("blue")
+export default function Horizontalbar({ orange, green, blue }) {
 
     return (
         <>
@@ -32,15 +28,15 @@ export default function Horizontalbar() {
                     <ul>
                         <li>
                             <label className="Horizontalbar_graph_orange_label">Leads</label>
-                            <div className="Horizontalbar_graph_orange" style={{ width: `${orangebar}%` }} ></div>
+                            <div className="Horizontalbar_graph_orange" style={{ width: `${orange}%` }} ></div>
                         </li>
                         <li>
                             <label>Nurturing</label>
-                            <div className="Horizontalbar_graph_green" style={{ width: `${greenbar}%` }} ></div>
+                            <div className="Horizontalbar_graph_green" style={{ width: `${green}%` }} ></div>
                         </li>
                         <li>
                             <label>Prospects</label>
-                            <div className="Horizontalbar_graph_blue" style={{ width: `${bluebar}%` }} ></div>
+                            <div className="Horizontalbar_graph_blue" style={{ width: `${blue}%` }} ></div>
                         </li>
                     </ul>
                 </div>

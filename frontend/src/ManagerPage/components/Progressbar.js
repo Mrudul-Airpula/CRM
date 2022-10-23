@@ -6,13 +6,10 @@ import { Doughnut } from "react-chartjs-2";
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 
-export default function Progressbar() {
+export default function Progressbar({ leadsc, prosc }) {
 
-  const leads = localStorage.getItem("leads")
-  const pros = localStorage.getItem("pros")
-  var per = (pros / leads) * 100;
+  var per = (prosc / leadsc) * 100;
   var per1 = per.toFixed(2)
-
 
   const data = {
 
@@ -20,7 +17,7 @@ export default function Progressbar() {
     datasets: [
       {
         label: "# of Votes",
-        data: [{ pros }, { leads }],
+        data: [prosc, leadsc],
         backgroundColor: [
           "#8833ff",
           "rgba(54, 162, 235, 0.2)",
