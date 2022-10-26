@@ -47,7 +47,7 @@ export default function Progressbar({ leadsc, prosc }) {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              marginLeft: "10px",
+              marginLeft: "30px",
               marginTop: "10px",
               width: "120px",
               height: "120px"

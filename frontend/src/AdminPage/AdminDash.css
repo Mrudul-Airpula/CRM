@@ -9,7 +9,7 @@
 }
 
 .Admin_page_contentpart_main {
-    width: 70%;
+    width: 63%;
     display: flex;
     flex-direction: column;
     margin-left: 80px;
@@ -18,12 +18,28 @@
 }
 
 .Admin_page_contentpart_main_row1 {
+    /* background-color: blue; */
+    /* padding-right: -50px; */
     display: flex;
     flex-direction: row;
     width: 100%;
-    margin-left: 0px;
     padding: -5px;
-    justify-content: space-evenly;
+}
+
+.Admin_page_contentpart_main_row1_bargraph{
+    /* background-color: yellow; */
+    width: 450px;
+    margin-left: 10px;
+}
+
+.Admin_page_contentpart_main_horizontal{
+    padding-top: 52px;
+    padding-left: 10px;
+    padding-right: 10px;
+    /* background-color: brown; */
+    width: 400px;
+    margin-left: 75px;
+    margin-right: 30px;
 }
 
 .Horizontalbar {
@@ -31,11 +47,11 @@
 }
 
 .Admin_page_contentpart_main_row2 {
+    /* background-color: red; */
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    padding-right: 40px;
 }
 
 .Admin_page_contentpart_main_row2_innerrow1 {
@@ -44,9 +60,9 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
-    padding-right: 60px;
+    padding-right: 50px;
     margin-right: 20px;
-    margin-left: 40px;
+    margin-left: -80px;
 }
 
 .Admin_page_contentpart_main_row2_innerrow2 {
@@ -55,13 +71,13 @@
     padding-bottom: 0;
     padding-left: 40px;
     padding-right: 40px;
-    margin-right: 40px;
     margin-left: 50px;
 
 }
 
 
 .Admin_page_contentpart_list {
-    margin-top: 40px;
-    margin-right: 20px;
+    /* background-color: tomato; */
+    margin-top: 45px;
+    margin-left: -15px;
 }

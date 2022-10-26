@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import "./Progressbar.css";
 import { AiOutlineMore } from "react-icons/ai";
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
@@ -34,7 +34,7 @@ export default function Login({ prosc, leadsc }) {
   return (
     <>
       <div className='Progressbarouter'>
-        <div className='Progressbarouter_inner'>
+        <div className='Progressbarouter_inner_top'>
           <div className='Progressbarouter_inner_row1'>
             <label>Prospect Progress</label>
             <AiOutlineMore className='Progressbarmore' />
@@ -47,8 +47,8 @@ export default function Login({ prosc, leadsc }) {
               flexDirection: "column",
               alignItems: "center",
               justifyContent: "center",
-              marginLeft: "10px",
-              marginTop: "10px",
+              marginLeft: "35px",
+              marginTop: "15px",
               width: "120px",
               height: "120px"
 

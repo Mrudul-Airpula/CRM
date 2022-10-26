@@ -24,10 +24,11 @@ export default function ManagerDash() {
     const [greenheight, setGreenHeight] = useState(0);
     const [orangeheight, setOrangeHeight] = useState(0);
 
-    const [genman, setGenMan] = useState(0);
-    const [areaman, setAreaMan] = useState(0);
-    const [assisman, setAssisMan] = useState(0);
-    const [salesman, setSalesMan] = useState(0);
+    const [salesman1, setSalesMan1] = useState(0);
+    const [salesman2, setSalesMan2] = useState(0);
+    const [salesman3, setSalesMan3] = useState(0);
+    const [salesman4, setSalesMan4] = useState(0);
+    const [salesname1, setSalesName1] = useState("");
 
     //ProspectGrowth Axios
 
@@ -82,16 +83,18 @@ export default function ManagerDash() {
             })
     })
 
-    //ManagerWiseProspectCount Axios
+    //SalesPersonWiseProspectCount Axios
 
     useEffect(() => {
-        const url = "http://localhost:3000/dev/ManagerwiseProspectCount";
-        // const url = "https://y64ha1qk80.execute-api.us-east-1.amazonaws.com/dev/ManagerwiseProspectCount";
+        const url = "http://localhost:3000/dev/SaleswisePropectcount";
+        // const url = "https://y64ha1qk80.execute-api.us-east-1.amazonaws.com/dev/SaleswisePropectcount";
         const data = {};
         const header = {};
         axios.post(url, data, { Headers: header })
             .then((res) => {
-                console.log("Response => " + JSON.stringify(res.data))
+                console.log("Response => " + JSON.stringify(res.data[0].count))
+                setSalesMan1(res.data[0].count)
+                setSalesName1(res.data[0].txtFirstName)
             })
             .catch((err) => {
                 console.log("Error => " + err)
@@ -128,11 +131,13 @@ export default function ManagerDash() {
                 <div className="ManagerDash_page_content_area">
                     <div className="ManagerDash_page_content_area_row1">
                         <Bargraph orangeh={orangeheight} greenh={greenheight} blueh={blueheight} bluec={bluecamp} />
-                        <Horizontalbar orange={orangebar} green={greenbar} blue={bluebar} />
+                        <div className="ManagerDash_page_content_area_horizontal">
+                            <Horizontalbar orange={orangebar} green={greenbar} blue={bluebar} />
+                        </div>
                     </div>
                     <div className="ManagerDash_page_content_area_row2">
                         <div className="ManagerDash_page_content_area_row2_summary">
-                            <Summary genc={genman} assisc={assisman} salesc={salesman} areac={areaman} />
+                            <Summary user1={salesman1} user2={salesman2} user3={salesman3} user4={salesman4} name1={salesname1} />
                         </div>
                         <div className="ManagerDash_page_content_area_row2_bars">
                             <SummaryCount pcount={pcount} />

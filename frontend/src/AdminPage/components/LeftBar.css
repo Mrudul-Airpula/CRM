@@ -34,9 +34,10 @@
 
 
 
-.leftbar {
-  height: 100vh;
+.leftbar_main {
+  height: 122vh;
   background-color: #f3f3f4;
+  /* background-color: yellowgreen; */
   padding-top: 10px;
   display: flex;
   flex-direction: column;

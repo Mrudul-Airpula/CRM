@@ -6,29 +6,29 @@ export default function Summary({ genc, areac, assisc, salesc }) {
 
     return (
         <>
-            <div className="summary">
-                <div className="summary_row1">
+            <div className="summary1_top">
+                <div className="summary1_row1">
                     <label>Manager wise Prospect Count</label>
                     <BsThreeDotsVertical className="icon" />{" "}
                 </div>
-                <div className="summary_row">
-                    <div className="summary_single">
-                        <label> General Manager</label>
-                        <label className="summary_value">{genc}</label>
+                <div className="summary1_row">
+                    <div className="summary1_single_main">
+                        <label className="summary1_value">{genc}</label>
+                        <label className="summary1_single_title"> General Manager</label>
                     </div>
-                    <div className="summary_single">
-                        <label>Area Manager</label>
-                        <label className="summary_value">{areac}</label>
+                    <div className="summary1_single_main">
+                        <label className="summary1_value">{areac}</label>
+                        <label className="summary1_single_title">Area Manager</label>
                     </div>
-                    <div className="summary_single">
-                        <label>Assistant Manager</label>
-                        <label className="summary_value">{assisc}</label>
+                    <div className="summary1_single_main">
+                        <label className="summary1_value">{assisc}</label>
+                        <label className="summary1_single_title">Assistant Manager</label>
                     </div>
                 </div>
-                <div className="summary_row">
-                    <div className="summary_single">
-                        <label>Sales Manager</label>
-                        <label className="summary_value">{salesc}</label>
+                <div className="summary1_row">
+                    <div className="summary1_single_main">
+                        <label className="summary1_value">{salesc}</label>
+                        <label className="summary1_single_title">Sales Manager</label>
                     </div>
                     {/* <div className="summary_single">
                         <label>Manager1</label>

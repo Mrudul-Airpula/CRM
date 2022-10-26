@@ -1,20 +1,18 @@
-.summary {
+.summary1_top {
     background-color: white;
     /* background-color: aqua; */
     border: 1px solid #95aac7;
     border-radius: 15px;
     /* height: 30%; */
-    margin-top: 10%;
-    width: 50%;
-    margin-left: 25%;
+    margin-top: 5%;
+    width: 55%;
+    margin-left: 45%;
     margin-bottom: 10%;
-    padding-bottom: 10px;
-    padding-right: 130px;
-
-
+    padding-bottom: 30px;
+    padding-right: 150px;
 }
 
-.summary_row1 {
+.summary1_row1 {
     width: 130%;
     display: flex;
     flex-direction: row;
@@ -28,24 +26,19 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.summary_row1 .icon{
+.summary1_row1 .icon{
+    margin-right: 20px;
     color: #4D5E80;
 }
 
-.summary_row1 label{
+.summary1_row1 label{
     font-family: Arial, Helvetica, sans-serif;
     color: #4D5E80;
 }
 
-.summarycount_label{
-    color: #4D5E80;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-
-.summary_row {
+.summary1_row {
     /* background-color: crimson; */
-    width: 100%;
+    width: 120%;
     display: flex;
     flex-direction: row;
     /* padding: 5px 5%; */
@@ -55,12 +48,13 @@
     padding-right: 30px;
     padding-left: 30px;
     padding-bottom: 5px;
+    margin-left: 5px;
 }
 
 
-.summary_single {
+.summary1_single_main {
     font-size: 1rem;
-    /* background-color: rgb(242, 247, 248); */
+    /* background-color: yellow; */
     background-color: #f3f3f4;
     padding-top: 5%;
     height: 30px;
@@ -73,17 +67,18 @@
     border-radius: 10px;
     border: 1px solid #f7f8fa;
     font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
-    padding: 30px;
+    padding: 40px;
     align-items: center;
     justify-content: space-evenly;
     margin: 2px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
-.summary_value {
+.summary1_value {
     /* background-color: black; */
     font-size: 1rem;
     font-weight: bold;
     margin-top: 10px;
+    margin-bottom: 10px;
     font-family: Arial, Helvetica, sans-serif;
 }

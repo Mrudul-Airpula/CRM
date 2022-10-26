@@ -19,6 +19,11 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
+.bargraph_title label{
+    margin-left: -5px;
+    margin-right: 5px;
+}
+
 .bargraph_graph{
     /* background-color: aqua; */
     height: 100%;
@@ -28,19 +33,22 @@
 }
 
 .bargraph .icon {
-    padding-left: 20px;
-    color: #4D5E80;
+    margin-top: 8px;
+    padding-left: 45px;
+    /* color: #4D5E80; */
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
 }
 
 .bargraph_graph ul {
+    /* background-color: yellow; */
     display: flex;
     flex-direction: row;
     list-style-type: none;
     justify-content: space-between;
     padding: 0;
     margin: 0;
+    align-items: center;
 }
 
 .bargraph_graph li {
@@ -79,7 +87,6 @@
     font-weight: bold;
     font-family: Arial, Helvetica, sans-serif;
 }
-
 
 .bargraph_bluegraph {
     background-color: blue;

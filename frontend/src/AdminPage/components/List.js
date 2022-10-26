@@ -4,7 +4,7 @@ export default function List({ user }) {
 
 
     return <>
-        <div className="list">
+        <div className="list_main">
             <div className="list_title">
                 <label>User List</label>
                 <BsThreeDotsVertical />

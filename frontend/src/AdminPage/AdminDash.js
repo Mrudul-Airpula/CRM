@@ -152,8 +152,12 @@ export default function AdminDash() {
                 </div>
                 <div className='Admin_page_contentpart_main'>
                     <div className='Admin_page_contentpart_main_row1'>
+                        <div className="Admin_page_contentpart_main_row1_bargraph">
                         <Bargraph orangeh={orangeheight} greenh={greenheight} blueh={blueheight} bluec={bluecamp} />
+                        </div>
+                        <div className="Admin_page_contentpart_main_horizontal">
                         <Horizontalbar orange={orangebar} green={greenbar} blue={bluebar} />
+                        </div>
                     </div>
                     <div className='Admin_page_contentpart_main_row2'>
                         <div className="Admin_page_contentpart_main_row2_innerrow1">
